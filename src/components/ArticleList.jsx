@@ -1,16 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
+import { getArticles } from "../utils/api";
 
-const ArticleList = () => {
-  return (
-    <div id="articlelist">
-      <h2>Articles</h2>
-      <ul>
-        <li>Article 1</li>
-        <li>Article 2</li>
-        <li>Article 3</li>
+class ArticleList extends Component {
+  state = {
+    articles: []
+  };
+  render() {
+    const { articles } = this.state;
+    return (
+      <ul id="articlelist">
+        {articles.map(article => {
+          return <li key={article.article_id}>{article.title}</li>;
+        })}
       </ul>
-    </div>
-  );
-};
+    );
+  }
+
+  componentDidMount = () => {
+    getArticles().then(articles => {
+      this.setState({ articles });
+    });
+  };
+}
 
 export default ArticleList;

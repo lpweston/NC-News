@@ -6,7 +6,10 @@ const Home = () => {
   return (
     <div id="Home">
       <SideBar />
-      <ArticleList />
+      <section>
+        <h2>Articles</h2>
+        <ArticleList />
+      </section>
     </div>
   );
 };
