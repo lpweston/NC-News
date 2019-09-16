@@ -17,7 +17,17 @@ class ArticleList extends Component {
   }
 
   componentDidMount = () => {
-    getArticles().then(articles => {
+    this.callApi();
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.topic !== this.props.topic) {
+      this.callApi();
+    }
+  };
+
+  callApi = () => {
+    getArticles(this.props).then(articles => {
       this.setState({ articles });
     });
   };

@@ -13,16 +13,29 @@ class Topic extends Component {
         <section>
           <h2>{topic[0].toUpperCase() + topic.slice(1)}</h2>
           <p>{description}</p>
-          <ArticleList slug={topic} />
+          <ArticleList topic={topic} />
         </section>
       </div>
     );
   }
 
   componentDidMount = () => {
+    this.callApi();
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.topic !== this.props.topic) {
+      this.callApi();
+    }
+  };
+
+  callApi = () => {
     getTopics(this.props.topic)
       .then(topic => {
-        this.setState({ description: topic.description });
+        this.setState({
+          topic: this.props.topic,
+          description: topic.description
+        });
       })
       .catch(err => {
         console.log(err);

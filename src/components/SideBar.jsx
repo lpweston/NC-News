@@ -8,7 +8,7 @@ const SideBar = () => {
       <TopicList />
       <h3>Sort</h3>
       <ul>
-        <li>newest</li> <li>popular</li>
+        <li>Newest</li> <li>Popular</li>
       </ul>
       <input></input>
       <button>Search</button>

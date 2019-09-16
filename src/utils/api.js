@@ -4,10 +4,14 @@ const request = axios.create({
   baseURL: "https://news-northcoders.herokuapp.com/api"
 });
 
-export const getArticles = () => {
-  return request.get("/articles").then(res => {
-    return res.data.articles;
-  });
+export const getArticles = ({ author, topic, sort_by, order }) => {
+  return request
+    .get("/articles", {
+      params: { author, topic, sort_by, order }
+    })
+    .then(res => {
+      return res.data.articles;
+    });
 };
 
 export const getTopics = topic => {
@@ -16,5 +20,17 @@ export const getTopics = topic => {
       return res.data.topics.filter(({ slug }) => slug === topic)[0];
     }
     return res.data.topics;
+  });
+};
+
+export const getUsers = () => {
+  return request.get("/users").then(res => {
+    return res.data.users;
+  });
+};
+
+export const getUser = username => {
+  return request.get(`/users/${username}`).then(res => {
+    return res.data.user;
   });
 };

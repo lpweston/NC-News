@@ -28,3 +28,18 @@ section {
   width: 20%;
   border-right: 2px solid black;
 }
+
+#users {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(235, 235, 235);
+}
+
+.user {
+  margin: 15px;
+  padding: 15px;
+  list-style-type: none;
+  background-color: rgb(219, 218, 218);
+  display: flex;
+  width: 40%;
+}
