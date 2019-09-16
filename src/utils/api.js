@@ -14,6 +14,12 @@ export const getArticles = ({ author, topic, sort_by, order }) => {
     });
 };
 
+export const getArticle = article_id => {
+  return request.get(`/articles/${article_id}`).then(res => {
+    return res.data.article;
+  });
+};
+
 export const getTopics = topic => {
   return request.get("/topics").then(res => {
     if (topic) {
@@ -32,5 +38,11 @@ export const getUsers = () => {
 export const getUser = username => {
   return request.get(`/users/${username}`).then(res => {
     return res.data.user;
+  });
+};
+
+export const getComments = article_id => {
+  return request.get(`/articles/${article_id}/comments`).then(res => {
+    return res.data.comments;
   });
 };

@@ -20,16 +20,16 @@ class Topic extends Component {
   }
 
   componentDidMount = () => {
-    this.callApi();
+    this.fetchTopics();
   };
 
   componentDidUpdate = prevProps => {
     if (prevProps.topic !== this.props.topic) {
-      this.callApi();
+      this.fetchTopics();
     }
   };
 
-  callApi = () => {
+  fetchTopics = () => {
     getTopics(this.props.topic)
       .then(topic => {
         this.setState({

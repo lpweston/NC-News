@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 import { getArticles } from "../utils/api";
 
 class ArticleList extends Component {
@@ -10,23 +11,29 @@ class ArticleList extends Component {
     return (
       <ul id="articlelist">
         {articles.map(article => {
-          return <li key={article.article_id}>{article.title}</li>;
+          return (
+            <li key={article.article_id}>
+              <Link to={`/articles/${article.article_id}`}>
+                {article.title}
+              </Link>
+            </li>
+          );
         })}
       </ul>
     );
   }
 
   componentDidMount = () => {
-    this.callApi();
+    this.fetchArticles();
   };
 
   componentDidUpdate = prevProps => {
     if (prevProps.topic !== this.props.topic) {
-      this.callApi();
+      this.fetchArticles();
     }
   };
 
-  callApi = () => {
+  fetchArticles = () => {
     getArticles(this.props).then(articles => {
       this.setState({ articles });
     });
