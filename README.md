@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NC-News Front End
+This project is to design the front end for a discussion board for NorthCoders. 
+The back-end is [hosted here](https://news-northcoders.herokuapp.com/api), and the [git repository is here](https://github.com/lpweston/nc-news-BE).
 
 ## Available Scripts
 
