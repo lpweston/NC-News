@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Router } from "@reach/router";
+import "./App.css";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Topic from "./components/Topic";
+import Article from "./components/Article";
+import NewArticle from "./components/NewArticle";
+import Users from "./components/Users";
+import User from "./components/User";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Router>
+        <Home path="/" />
+        <Topic path="/:topic" />
+        <Article path="/articles/:article" />
+        <NewArticle path="/newarticle" />
+        <Users path="/users" />
+        <User path="/users/:user" />
+      </Router>
     </div>
   );
 }
