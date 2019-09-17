@@ -9,6 +9,7 @@ import NewArticle from "./components/NewArticle";
 import Users from "./components/Users";
 import User from "./components/User";
 import ErrorHandler from "./components/ErrorHandler";
+import AddUser from "./components/AddUser";
 
 class App extends Component {
   state = { currentUser: "guest" };
@@ -23,6 +24,7 @@ class App extends Component {
           <NewArticle path="/newarticle" />
           <Users path="/users" />
           <User path="/users/:user" />
+          <AddUser path="/newuser" />
           <ErrorHandler default />
         </Router>
       </div>

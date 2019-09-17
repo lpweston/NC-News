@@ -4,17 +4,23 @@ import { Link } from "@reach/router";
 import NewComment from "./NewComment";
 import CommentList from "./CommentList";
 import SideBar from "./SideBar";
+import ErrorHandler from "./ErrorHandler";
 import { patchArticle } from "../utils/api";
+import Loading from "./Loading";
 
 class Article extends Component {
   state = {
     article: null,
-    isLoading: true
+    isLoading: true,
+    err: null
   };
   render() {
-    const { article, isLoading } = this.state;
+    const { article, isLoading, err } = this.state;
+    if (err) {
+      return <ErrorHandler err={err} />;
+    }
     if (isLoading) {
-      return <p>Loading ...</p>;
+      return <Loading />;
     }
     const {
       title,
@@ -33,6 +39,7 @@ class Article extends Component {
             <Link to={`/users/${author}`}>{author}</Link>
           </h3>
           <p>Created: {created_at} </p>
+          <p>{article.body}</p>
           <p>
             Comments: {comment_count} &middot; Votes: {votes}{" "}
             <button
@@ -50,7 +57,6 @@ class Article extends Component {
               v
             </button>
           </p>
-          <p>{article.body}</p>
           <h3>Comments:</h3>
           <NewComment />
           <CommentList article_id={article.article_id} />
@@ -60,14 +66,26 @@ class Article extends Component {
   }
   componentDidMount = () => {
     const { article } = this.props;
-    getArticle(article).then(article => {
-      this.setState({ article, isLoading: false });
-    });
+    getArticle(article)
+      .then(article => {
+        this.setState({ article, isLoading: false });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg }, isLoading: false });
+      });
   };
   incArticle = (article_id, inc) => {
-    patchArticle(article_id, inc).then(article => {
-      this.setState({ article });
-    });
+    patchArticle(article_id, inc)
+      .then(article => {
+        this.setState({ article });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg }, isLoading: false });
+      });
   };
 }
 

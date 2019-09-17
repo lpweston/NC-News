@@ -32,9 +32,12 @@ section {
 }
 
 #users {
+  background-color: rgb(235, 235, 235);
+}
+
+#usersList {
   display: flex;
   flex-wrap: wrap;
-  background-color: rgb(235, 235, 235);
 }
 
 .user {

@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { getArticles } from "../utils/api";
 import ArticleItem from "./ArticleItem";
+import ErrorHandler from "./ErrorHandler";
+import Loading from "./Loading";
 
 class ArticleList extends Component {
   state = {
     articles: [],
-    isLoading: true
+    isLoading: true,
+    err: null
   };
   render() {
-    const { articles, isLoading } = this.state;
+    const { articles, isLoading, err } = this.state;
+    if (err) return <ErrorHandler err={err} />;
     return isLoading ? (
-      <p>loading ...</p>
+      <Loading />
     ) : (
       <ul className="articlelist">
         {articles.map(article => {
@@ -33,9 +37,15 @@ class ArticleList extends Component {
   };
 
   fetchArticles = () => {
-    getArticles(this.props).then(articles => {
-      this.setState({ articles, isLoading: false });
-    });
+    getArticles(this.props)
+      .then(articles => {
+        this.setState({ articles, isLoading: false });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg }, isLoading: false });
+      });
   };
 }
 

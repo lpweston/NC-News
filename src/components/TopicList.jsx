@@ -1,17 +1,20 @@
 import React from "react";
 import { getTopics } from "../utils/api";
 import { Link } from "@reach/router";
+import Loading from "./Loading";
+import ErrorHandler from "./ErrorHandler";
 
 class TopicList extends React.Component {
   state = {
     topics: [],
-    isLoading: true
+    isLoading: true,
+    err: null
   };
   render() {
-    const { topics, isLoading } = this.state;
-    return isLoading ? (
-      <p>Loading...</p>
-    ) : (
+    const { topics, isLoading, err } = this.state;
+    if (isLoading) return <Loading />;
+    if (err) return <ErrorHandler err={err} />;
+    return (
       <ul>
         <li key="All">
           <Link to={"/"}>All Articles</Link>
@@ -30,9 +33,15 @@ class TopicList extends React.Component {
   }
 
   componentDidMount = () => {
-    getTopics().then(topics => {
-      this.setState({ topics, isLoading: false });
-    });
+    getTopics()
+      .then(topics => {
+        this.setState({ topics, isLoading: false });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg }, isLoading: false });
+      });
   };
 }
 

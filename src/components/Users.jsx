@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import { getUsers } from "../utils/api";
 import { Link } from "@reach/router";
+import ErrorHandler from "./ErrorHandler";
+import Loading from "./Loading";
 
 class Users extends Component {
   state = {
-    users: []
+    users: [],
+    err: null,
+    isLoading: true
   };
   render() {
-    const { users } = this.state;
+    const { users, isLoading, err } = this.state;
+    if (err) return <ErrorHandler />;
+    if (isLoading) return <Loading />;
     return (
-      <>
+      <div id="users">
         <h2>Users</h2>
-        <ul id="users">
+        <Link to="/newuser">Add New User</Link>
+        <ul id="usersList">
           {users.map(user => {
             return (
               <li key={user.username} className="user">
@@ -28,13 +35,19 @@ class Users extends Component {
             );
           })}
         </ul>
-      </>
+      </div>
     );
   }
   componentDidMount = () => {
-    getUsers().then(users => {
-      this.setState({ users });
-    });
+    getUsers()
+      .then(users => {
+        this.setState({ users, isLoading: false });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg }, isLoading: false });
+      });
   };
 }
 
