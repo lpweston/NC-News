@@ -58,7 +58,10 @@ class Article extends Component {
             </button>
           </p>
           <h3>Comments:</h3>
-          <NewComment />
+          <NewComment
+            currentUser={this.props.currentUser}
+            article_id={article_id}
+          />
           <CommentList article_id={article.article_id} />
         </section>
       </div>
@@ -76,6 +79,7 @@ class Article extends Component {
         this.setState({ err: { status, msg }, isLoading: false });
       });
   };
+
   incArticle = (article_id, inc) => {
     patchArticle(article_id, inc)
       .then(article => {
