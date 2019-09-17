@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
 import { getArticles } from "../utils/api";
+import ArticleItem from "./ArticleItem";
 
 class ArticleList extends Component {
   state = {
@@ -14,13 +14,7 @@ class ArticleList extends Component {
     ) : (
       <ul className="articlelist">
         {articles.map(article => {
-          return (
-            <li key={article.article_id}>
-              <Link to={`/articles/${article.article_id}`}>
-                {article.title}
-              </Link>
-            </li>
-          );
+          return <ArticleItem article={article} key={article.article_id} />;
         })}
       </ul>
     );
@@ -31,8 +25,10 @@ class ArticleList extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (prevProps.topic !== this.props.topic) {
-      this.fetchArticles();
+    for (const key in prevProps) {
+      if (prevProps[key] !== this.props[key]) {
+        this.fetchArticles();
+      }
     }
   };
 

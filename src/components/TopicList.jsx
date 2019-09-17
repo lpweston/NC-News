@@ -19,7 +19,7 @@ class TopicList extends React.Component {
         {topics.map(topic => {
           return (
             <li key={topic.slug}>
-              <Link to={`/${topic.slug}`}>
+              <Link to={`/topic/${topic.slug}`}>
                 {topic.slug[0].toUpperCase() + topic.slug.slice(1)}
               </Link>
             </li>

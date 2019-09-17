@@ -4,34 +4,29 @@ import SideBar from "./SideBar";
 
 class Home extends Component {
   state = {
-    sort: null
+    sort_by: undefined,
+    order: undefined
   };
   render() {
-    const { sort } = this.state;
+    const { sort_by, order } = this.state;
     return (
       <div id="Home">
-        <SideBar sortArticles={this.sortArticles} clearSort={this.clearSort} />
+        <SideBar sortArticles={this.sortArticles} />
         <section>
           <h2>Articles</h2>
-          {sort && (
+          {sort_by && (
             <p>
-              Sorted by: {sort.sort_by} {sort.order}
+              Sorted by: {sort_by} {order}
             </p>
           )}
-          <ArticleList sort={sort} />
+          <ArticleList sort_by={sort_by} order={order} />
         </section>
       </div>
     );
   }
-
   sortArticles = e => {
-    const sort = e.target.value.split(" ");
-    const newSort = { sort_by: sort[0], order: sort[1] };
-    this.setState({ sort: newSort });
-  };
-
-  clearSort = e => {
-    console.log("clear");
+    const pair = e.target.value.split(" ");
+    this.setState({ sort_by: pair[0], order: pair[1] });
   };
 }
 

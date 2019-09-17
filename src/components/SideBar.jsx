@@ -10,13 +10,10 @@ class SideBar extends Component {
         <h3>Sort</h3>
         <ul>
           <li>Date {this.makeButtons("created_at")}</li>
-          <li>Votes {this.makeButtons("votes")}</li>
-          <li>Comments {this.makeButtons("commnet_count")}</li>
+          <li>Popularity {this.makeButtons("votes")}</li>
           <li>Title {this.makeButtons("title")}</li>
           <li>Author {this.makeButtons("author")}</li>
         </ul>
-        <input></input>
-        <button>Search</button>
       </div>
     );
   }
