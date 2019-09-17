@@ -4,13 +4,14 @@ body {
 
 header {
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
   border-bottom: 2px solid black;
 }
 
-h1,
-nav {
-  flex-grow: 1;
+h1 {
+  grid-row: 1 / span 2;
 }
 
 section {
@@ -20,11 +21,12 @@ section {
 }
 
 #Home,
-#Topic {
+#Topic,
+.Article {
   display: flex;
 }
 
-#sidebar {
+.sidebar {
   width: 20%;
   border-right: 2px solid black;
 }

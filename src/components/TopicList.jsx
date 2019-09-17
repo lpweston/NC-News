@@ -4,12 +4,18 @@ import { Link } from "@reach/router";
 
 class TopicList extends React.Component {
   state = {
-    topics: []
+    topics: [],
+    isLoading: true
   };
   render() {
-    const { topics } = this.state;
-    return (
+    const { topics, isLoading } = this.state;
+    return isLoading ? (
+      <p>Loading...</p>
+    ) : (
       <ul>
+        <li key="All">
+          <Link to={"/"}>All Articles</Link>
+        </li>
         {topics.map(topic => {
           return (
             <li key={topic.slug}>
@@ -25,7 +31,7 @@ class TopicList extends React.Component {
 
   componentDidMount = () => {
     getTopics().then(topics => {
-      this.setState({ topics });
+      this.setState({ topics, isLoading: false });
     });
   };
 }

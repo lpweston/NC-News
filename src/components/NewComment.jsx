@@ -1,12 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 
-const NewComment = () => {
-  return (
-    <div>
-      New Comment:
-      <input></input>
-    </div>
-  );
-};
+class NewComment extends Component {
+  render() {
+    return (
+      <form onSubmit={this.postComment}>
+        <input placeholder="Post new comment" />
+        <button>Submit</button>
+      </form>
+    );
+  }
+  postComment = () => {};
+}
 
 export default NewComment;

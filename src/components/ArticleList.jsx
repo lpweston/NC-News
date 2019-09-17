@@ -4,12 +4,15 @@ import { getArticles } from "../utils/api";
 
 class ArticleList extends Component {
   state = {
-    articles: []
+    articles: [],
+    isLoading: true
   };
   render() {
-    const { articles } = this.state;
-    return (
-      <ul id="articlelist">
+    const { articles, isLoading } = this.state;
+    return isLoading ? (
+      <p>loading ...</p>
+    ) : (
+      <ul className="articlelist">
         {articles.map(article => {
           return (
             <li key={article.article_id}>
@@ -35,7 +38,7 @@ class ArticleList extends Component {
 
   fetchArticles = () => {
     getArticles(this.props).then(articles => {
-      this.setState({ articles });
+      this.setState({ articles, isLoading: false });
     });
   };
 }
