@@ -7,12 +7,13 @@ class UserSelect extends Component {
   };
   render() {
     const { usernames } = this.state;
+    const { login } = this.props;
     return (
       <div>
         Logged in as: &nbsp;
-        <select>
-          <option value="Guest" defaultValue>
-            Guest
+        <select onChange={login}>
+          <option value="guest" defaultValue>
+            guest
           </option>
           {usernames.map(username => {
             return (
