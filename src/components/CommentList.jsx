@@ -9,7 +9,7 @@ class CommentList extends Component {
     return (
       <ul>
         {comments.map(comment => {
-          return <CommentItem comment={comment} />;
+          return <CommentItem comment={comment} key={comment.comment_id} />;
         })}
       </ul>
     );

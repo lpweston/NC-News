@@ -18,7 +18,7 @@ class App extends Component {
         <Header login={this.login} />
         <Router>
           <Home path="/" />
-          <Topic path="/topic/:topic" />
+          <Topic path="/topics/:topic" />
           <Article path="/articles/:article" />
           <NewArticle path="/newarticle" />
           <Users path="/users" />

@@ -4,7 +4,7 @@ import TopicList from "./TopicList";
 class SideBar extends Component {
   render() {
     return (
-      <div id="sidebar">
+      <div className="sidebar">
         <h3>Topics</h3>
         <TopicList />
         <h3>Sort</h3>
