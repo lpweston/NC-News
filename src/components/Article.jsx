@@ -7,20 +7,29 @@ import SideBar from "./SideBar";
 import ErrorHandler from "./ErrorHandler";
 import { patchArticle } from "../utils/api";
 import Loading from "./Loading";
+import { deleteArticle } from "../utils/api";
 
 class Article extends Component {
   state = {
     article: null,
     isLoading: true,
-    err: null
+    err: null,
+    deleted: false
   };
   render() {
-    const { article, isLoading, err } = this.state;
-    if (err) {
-      return <ErrorHandler err={err} />;
-    }
-    if (isLoading) {
-      return <Loading />;
+    const { article, isLoading, err, deleted } = this.state;
+    const { currentUser } = this.props;
+    if (err) return <ErrorHandler err={err} />;
+    if (isLoading) return <Loading />;
+    if (deleted) {
+      return (
+        <div className="Article">
+          <SideBar />
+          <section className="Article-section">
+            <p>Deleted article</p>
+          </section>
+        </div>
+      );
     }
     const {
       title,
@@ -40,6 +49,9 @@ class Article extends Component {
           </h3>
           <p>Created: {created_at} </p>
           <p>{article.body}</p>
+          {currentUser === author && (
+            <button onClick={this.removeArticle}>Delete</button>
+          )}
           <p>
             Comments: {comment_count} &middot; Votes: {votes}{" "}
             <button
@@ -62,7 +74,10 @@ class Article extends Component {
             currentUser={this.props.currentUser}
             article_id={article_id}
           />
-          <CommentList article_id={article.article_id} />
+          <CommentList
+            article_id={article.article_id}
+            currentUser={this.props.currentUser}
+          />
         </section>
       </div>
     );
@@ -89,6 +104,17 @@ class Article extends Component {
         const { status } = response;
         const { msg } = response.data;
         this.setState({ err: { status, msg }, isLoading: false });
+      });
+  };
+  removeArticle = () => {
+    deleteArticle(this.state.article.article_id)
+      .then(() => {
+        this.setState({ deleted: true });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg } });
       });
   };
 }

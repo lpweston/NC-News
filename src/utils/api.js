@@ -21,6 +21,10 @@ export const patchArticle = async (article_id, inc_votes) => {
   return res.data.article;
 };
 
+export const deleteArticle = article_id => {
+  return request.delete(`/articles/${article_id}`);
+};
+
 export const getTopics = async topic => {
   const res = await request.get("/topics");
   if (topic) {
@@ -55,10 +59,13 @@ export const patchComments = async (comment_id, inc_votes) => {
 };
 
 export const postComment = async (article_id, username, body) => {
-  console.log(article_id, username, body);
   const res = await request.post(`/articles/${article_id}/comments`, {
     username,
     body
   });
   return res.data.comment;
+};
+
+export const deleteComment = comment_id => {
+  return request.delete(`/comments/${comment_id}`);
 };

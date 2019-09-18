@@ -13,7 +13,13 @@ class CommentList extends Component {
     return (
       <ul>
         {comments.map(comment => {
-          return <CommentItem comment={comment} key={comment.comment_id} />;
+          return (
+            <CommentItem
+              comment={comment}
+              key={comment.comment_id}
+              currentUser={this.props.currentUser}
+            />
+          );
         })}
       </ul>
     );
