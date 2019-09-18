@@ -1,36 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import TopicList from "./TopicList";
 
-class SideBar extends Component {
-  render() {
-    return (
-      <div className="sidebar">
-        <h3>Topics</h3>
-        <TopicList />
-        <h3>Sort</h3>
-        <ul>
-          <li>Date {this.makeButtons("created_at")}</li>
-          <li>Popularity {this.makeButtons("votes")}</li>
-          <li>Comments {this.makeButtons("comment_count")}</li>
-          <li>Title {this.makeButtons("title")}</li>
-          <li>Author {this.makeButtons("author")}</li>
-        </ul>
-      </div>
-    );
-  }
-  makeButtons = sortParam => {
-    const { sortArticles } = this.props;
-    return (
-      <>
-        <button value={sortParam + " asc"} onClick={sortArticles}>
-          ^
-        </button>
-        <button value={sortParam + " desc"} onClick={sortArticles}>
-          v
-        </button>
-      </>
-    );
-  };
-}
+const makeButtons = (sortParam, sortArticles) => {
+  return (
+    <>
+      <button value={sortParam + " asc"} onClick={sortArticles}>
+        ^
+      </button>
+      <button value={sortParam + " desc"} onClick={sortArticles}>
+        v
+      </button>
+    </>
+  );
+};
+const SideBar = ({ sortArticles }) => {
+  return (
+    <div className="sidebar">
+      <h3>Topics</h3>
+      <TopicList />
+      <h3>Sort</h3>
+      <ul>
+        <li>Date {makeButtons("created_at", sortArticles)}</li>
+        <li>Popularity {makeButtons("votes", sortArticles)}</li>
+        <li>Comments {makeButtons("comment_count", sortArticles)}</li>
+        <li>Title {makeButtons("title", sortArticles)}</li>
+        <li>Author {makeButtons("author", sortArticles)}</li>
+      </ul>
+    </div>
+  );
+};
 
 export default SideBar;
