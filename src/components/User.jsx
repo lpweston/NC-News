@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getUser } from "../utils/api";
 import ErrorHandler from "./ErrorHandler";
 import Loading from "./Loading";
+import ArticleList from "./ArticleList";
 
 class User extends Component {
   state = {
@@ -14,15 +15,21 @@ class User extends Component {
     if (isLoading) return <Loading />;
     if (err) return <ErrorHandler {...err} />;
     return (
-      <div className="user">
-        <img src={user.avatar_url} width="200px" alt="avatar" />
-        <div>
-          {user.username} <br />
-          Name: {user.name}
-          <br />
-          Articles: {user.article_count}
+      <>
+        <div className="user">
+          <img src={user.avatar_url} width="200px" alt="avatar" />
+          <div>
+            {user.username} <br />
+            Name: {user.name}
+            <br />
+            Articles: {user.article_count}
+          </div>
         </div>
-      </div>
+        <section>
+          <h3>Articles</h3>
+          <ArticleList author={user.username} />
+        </section>
+      </>
     );
   }
   componentDidMount = () => {

@@ -15,7 +15,7 @@ class TopicList extends React.Component {
     if (isLoading) return <Loading />;
     if (err) return <ErrorHandler {...err} />;
     return (
-      <ul>
+      <>
         <li key="All">
           <Link to={"/"}>All Articles</Link>
         </li>
@@ -28,7 +28,7 @@ class TopicList extends React.Component {
             </li>
           );
         })}
-      </ul>
+      </>
     );
   }
 

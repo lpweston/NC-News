@@ -1,0 +1,67 @@
+body {
+  background-color: rgb(150, 150, 150);
+}
+
+section {
+  padding: 30px;
+  flex-grow: 1;
+  background-color: rgb(204, 204, 204);
+}
+
+#users {
+  background-color: rgb(206, 206, 206);
+}
+
+#usersList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user {
+  margin: 15px;
+  padding: 15px;
+  background-color: rgb(150, 150, 150);
+  display: flex;
+  width: 40%;
+  flex-grow: 1;
+}
+.ArticleItem,
+.CommentItem {
+  margin: 15px;
+  padding: 15px;
+  background-color: rgb(150, 150, 150);
+}
+
+.CommentItem {
+  display: flex;
+}
+
+/*p  {
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+  text-align: justify;
+  max-width: 80vw;
+} */
+
+ul,
+li {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 5px;
+  padding: 0px;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  color: white;
+}
+
+@media (min-width: 777px) {
+  #Home,
+  #Topic,
+  .Article {
+    display: flex;
+  }
+}

@@ -1,32 +1,40 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import ErrorHandler from "./ErrorHandler";
-import { deleteComment } from "../utils/api";
+import { deleteComment, getUser } from "../utils/api";
 import Voting from "./Voting";
 
 class CommentItem extends Component {
-  state = { comment: this.props.comment, err: null, deleted: false };
+  state = {
+    comment: this.props.comment,
+    err: null,
+    deleted: false,
+    avatar_url: ""
+  };
   render() {
     const { comment_id, author, created_at, body, votes } = this.state.comment;
-    const { err, deleted } = this.state;
+    const { err, deleted, avatar_url } = this.state;
     const { currentUser } = this.props;
     if (deleted) return <li className="CommentItem">Comment deleted</li>;
     const date = new Date(created_at);
     return (
       <li className="CommentItem">
-        {<Link to={`/users/${author}`}>{author}</Link>} <br />
-        {date.toDateString() + " " + date.toTimeString()}
-        <br />
-        <br />
-        {body}
-        <br />
-        <br />
-        <Voting votes={votes} comment_id={comment_id} />
-        <br />
-        {currentUser === author && (
-          <button onClick={this.removeComment}>Delete</button>
-        )}
-        {err && <ErrorHandler {...err} />}
+        <img src={avatar_url} width="50px" height="50px" alt="avatar" />
+        <div>
+          <Link to={`/users/${author}`}>{author}</Link> <br />
+          {date.toDateString() + " " + date.toTimeString()}
+          <br />
+          <br />
+          {body}
+          <br />
+          <br />
+          <Voting votes={votes} comment_id={comment_id} />
+          <br />
+          {currentUser === author && (
+            <button onClick={this.removeComment}>Delete</button>
+          )}
+          {err && <ErrorHandler {...err} />}
+        </div>
       </li>
     );
   }
@@ -41,6 +49,12 @@ class CommentItem extends Component {
         const { msg } = response.data;
         this.setState({ err: { status, msg } });
       });
+  };
+
+  componentDidMount = () => {
+    getUser(this.state.comment.author).then(user => {
+      this.setState({ avatar_url: user.avatar_url });
+    });
   };
 }
 

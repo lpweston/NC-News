@@ -1,5 +1,6 @@
 import React from "react";
 import TopicList from "./TopicList";
+import "../styles/header.css";
 
 const makeButtons = (sortParam, sortArticles) => {
   return (
@@ -19,13 +20,11 @@ const SideBar = ({ sortArticles }) => {
       <h3>Topics</h3>
       <TopicList />
       <h3>Sort</h3>
-      <ul>
-        <li>Date {makeButtons("created_at", sortArticles)}</li>
-        <li>Popularity {makeButtons("votes", sortArticles)}</li>
-        <li>Comments {makeButtons("comment_count", sortArticles)}</li>
-        <li>Title {makeButtons("title", sortArticles)}</li>
-        <li>Author {makeButtons("author", sortArticles)}</li>
-      </ul>
+      <li>Date {makeButtons("created_at", sortArticles)}</li>
+      <li>Popularity {makeButtons("votes", sortArticles)}</li>
+      <li>Comments {makeButtons("comment_count", sortArticles)}</li>
+      <li>Title {makeButtons("title", sortArticles)}</li>
+      <li>Author {makeButtons("author", sortArticles)}</li>
     </div>
   );
 };

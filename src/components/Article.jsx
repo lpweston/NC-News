@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { getArticle } from "../utils/api";
 import { Link } from "@reach/router";
+import { getArticle, patchArticle, deleteArticle, getUser } from "../utils/api";
 import NewComment from "./NewComment";
 import CommentList from "./CommentList";
 import SideBar from "./SideBar";
 import ErrorHandler from "./ErrorHandler";
-import { patchArticle } from "../utils/api";
 import Loading from "./Loading";
-import { deleteArticle } from "../utils/api";
 import Voting from "./Voting";
 
 class Article extends Component {
@@ -15,10 +13,11 @@ class Article extends Component {
     article: null,
     isLoading: true,
     err: null,
-    deleted: false
+    deleted: false,
+    avatar_url: ""
   };
   render() {
-    const { article, isLoading, err, deleted } = this.state;
+    const { article, isLoading, err, deleted, avatar_url } = this.state;
     const { currentUser } = this.props;
     if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
@@ -47,12 +46,11 @@ class Article extends Component {
         <section className="Article-section">
           <h2>{title}</h2>
           <h3>
+            <img src={avatar_url} width="50px" height="50px" alt="avatar" />
             <Link to={`/users/${author}`}>{author}</Link>
           </h3>
           <p>{date.toDateString() + " " + date.toTimeString()} </p>
-          <br />
           <p>{article.body}</p>
-          <br />
           {currentUser === author && (
             <button onClick={this.removeArticle}>Delete</button>
           )}
@@ -76,6 +74,11 @@ class Article extends Component {
     getArticle(article)
       .then(article => {
         this.setState({ article, isLoading: false });
+      })
+      .then(() => {
+        getUser(this.state.article.author).then(user => {
+          this.setState({ avatar_url: user.avatar_url });
+        });
       })
       .catch(({ response }) => {
         const { status } = response;
