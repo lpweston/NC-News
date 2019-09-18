@@ -42,7 +42,7 @@ class Article extends Component {
     } = article;
     const date = new Date(created_at);
     return (
-      <div className="Article">
+      <main className="Article">
         <SideBar />
         <section className="Article-section">
           <h2>{title}</h2>
@@ -66,7 +66,7 @@ class Article extends Component {
             currentUser={this.props.currentUser}
           />
         </section>
-      </div>
+      </main>
     );
   }
   componentDidMount = () => {

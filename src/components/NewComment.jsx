@@ -11,9 +11,10 @@ class NewComment extends Component {
     comment: false
   };
   render() {
-    const { err, comment } = this.state;
+    const { err, comment, currentUser } = this.state;
     if (err) return <ErrorHandler {...err} />;
-    if (comment) return <CommentItem comment={comment} />;
+    if (comment)
+      return <CommentItem comment={comment} currentUser={currentUser} />;
     return (
       <form onSubmit={this.sendComment}>
         <input

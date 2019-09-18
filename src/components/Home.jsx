@@ -10,7 +10,7 @@ class Home extends Component {
   render() {
     const { sort_by, order } = this.state;
     return (
-      <div id="Home">
+      <main id="Home">
         <SideBar sortArticles={this.sortArticles} />
         <section>
           <h2>Articles</h2>
@@ -21,7 +21,7 @@ class Home extends Component {
           )}
           <ArticleList sort_by={sort_by} order={order} />
         </section>
-      </div>
+      </main>
     );
   }
   sortArticles = e => {
