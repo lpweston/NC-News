@@ -1,6 +1,6 @@
 import React from "react";
 
-const ErrorHandler = ({ err: { status = 404, msg = "page not found" } }) => {
+const ErrorHandler = ({ status = 404, msg = "Page not found" }) => {
   return (
     <p>
       {status}:{msg}

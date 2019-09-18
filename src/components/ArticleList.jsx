@@ -12,7 +12,7 @@ class ArticleList extends Component {
   };
   render() {
     const { articles, isLoading, err } = this.state;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     return isLoading ? (
       <Loading />
     ) : (

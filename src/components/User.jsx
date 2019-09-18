@@ -12,7 +12,7 @@ class User extends Component {
   render() {
     const { user, isLoading, err } = this.state;
     if (isLoading) return <Loading />;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     return (
       <div className="user">
         <img src={user.avatar_url} width="200px" alt="avatar" />

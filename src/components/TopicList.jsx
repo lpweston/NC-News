@@ -13,7 +13,7 @@ class TopicList extends React.Component {
   render() {
     const { topics, isLoading, err } = this.state;
     if (isLoading) return <Loading />;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     return (
       <ul>
         <li key="All">

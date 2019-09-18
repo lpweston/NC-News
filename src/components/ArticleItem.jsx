@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 
 const ArticleItem = props => {
   const { article } = props;
+  const date = new Date(article.created_at);
   return (
     <li key={article.article_id} className="ArticleItem">
       <Link to={`/articles/${article.article_id}`}>
@@ -10,7 +11,7 @@ const ArticleItem = props => {
       </Link>
       <p>
         <Link to={`/users/${article.author}`}>{article.author}</Link> &middot;
-        Created: {article.created_at}
+        {date.toDateString()}
         <br />
         Votes: {article.votes} &middot; Comments: {article.comment_count}
       </p>

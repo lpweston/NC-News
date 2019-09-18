@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { postUser } from "../utils/api";
 import ErrorHandler from "./ErrorHandler";
+import User from "./User";
 
 class AddUser extends Component {
   state = {
     username: "",
     name: "",
     avatar: "",
-    err: null
+    err: null,
+    newUser: null
   };
   render() {
-    const { username, name, avatar, err } = this.state;
-    if (err) {
-      return <ErrorHandler err={err} />;
-    }
+    const { username, name, avatar, err, newUser } = this.state;
+    if (newUser) return <User user={newUser.username} />;
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Add a new user</h2>
@@ -44,6 +44,7 @@ class AddUser extends Component {
         <br />* required
         <br />
         <button>Submit</button>
+        {err && <ErrorHandler {...err} />}
       </form>
     );
   }
@@ -55,8 +56,8 @@ class AddUser extends Component {
     e.preventDefault();
     const { username, name, avatar } = this.state;
     postUser(username, name, avatar)
-      .then(user => {
-        this.setState({ username: "", name: "", avatar: 2 });
+      .then(newUser => {
+        this.setState({ username: "", name: "", avatar: "", newUser });
       })
       .catch(({ response }) => {
         const { status } = response;

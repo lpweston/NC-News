@@ -12,7 +12,7 @@ class Users extends Component {
   };
   render() {
     const { users, isLoading, err } = this.state;
-    if (err) return <ErrorHandler />;
+    if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     return (
       <div id="users">

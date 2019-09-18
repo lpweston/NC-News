@@ -8,6 +8,7 @@ import ErrorHandler from "./ErrorHandler";
 import { patchArticle } from "../utils/api";
 import Loading from "./Loading";
 import { deleteArticle } from "../utils/api";
+import Voting from "./Voting";
 
 class Article extends Component {
   state = {
@@ -19,7 +20,7 @@ class Article extends Component {
   render() {
     const { article, isLoading, err, deleted } = this.state;
     const { currentUser } = this.props;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     if (deleted) {
       return (
@@ -39,6 +40,7 @@ class Article extends Component {
       comment_count,
       article_id
     } = article;
+    const date = new Date(created_at);
     return (
       <div className="Article">
         <SideBar />
@@ -47,28 +49,13 @@ class Article extends Component {
           <h3>
             <Link to={`/users/${author}`}>{author}</Link>
           </h3>
-          <p>Created: {created_at} </p>
+          <p>{date.toDateString() + " " + date.toTimeString()} </p>
           <p>{article.body}</p>
           {currentUser === author && (
             <button onClick={this.removeArticle}>Delete</button>
           )}
-          <p>
-            Comments: {comment_count} &middot; Votes: {votes}{" "}
-            <button
-              onClick={() => {
-                this.incArticle(article_id, 1);
-              }}
-            >
-              ^
-            </button>
-            <button
-              onClick={() => {
-                this.incArticle(article_id, -1);
-              }}
-            >
-              v
-            </button>
-          </p>
+          <p>Comments: {comment_count} </p>
+          <Voting votes={votes} article_id={article_id} />
           <h3>Comments:</h3>
           <NewComment
             currentUser={this.props.currentUser}

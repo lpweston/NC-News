@@ -43,8 +43,8 @@ export const getUser = async username => {
   return res.data.user;
 };
 
-export const postUser = async (username, name, avatar) => {
-  const res = await request.post("/users", { username, name, avatar });
+export const postUser = async (username, name, avatar_url) => {
+  const res = await request.post("/users", { username, name, avatar_url });
   return res.data.user;
 };
 

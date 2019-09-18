@@ -11,6 +11,7 @@ class SideBar extends Component {
         <ul>
           <li>Date {this.makeButtons("created_at")}</li>
           <li>Popularity {this.makeButtons("votes")}</li>
+          <li>Comments {this.makeButtons("comment_count")}</li>
           <li>Title {this.makeButtons("title")}</li>
           <li>Author {this.makeButtons("author")}</li>
         </ul>

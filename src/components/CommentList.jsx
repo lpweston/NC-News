@@ -8,7 +8,7 @@ class CommentList extends Component {
   state = { comments: [], isLoading: true, err: null };
   render() {
     const { comments, isLoading, err } = this.state;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     return (
       <ul>

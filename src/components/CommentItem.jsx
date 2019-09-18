@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
-import { patchComments } from "../utils/api";
 import ErrorHandler from "./ErrorHandler";
 import { deleteComment } from "../utils/api";
+import Voting from "./Voting";
 
 class CommentItem extends Component {
   state = { comment: this.props.comment, err: null, deleted: false };
@@ -10,29 +10,17 @@ class CommentItem extends Component {
     const { comment_id, author, created_at, body, votes } = this.state.comment;
     const { err, deleted } = this.state;
     const { currentUser } = this.props;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     if (deleted) return <li className="CommentItem">Comment deleted</li>;
+    const date = new Date(created_at);
     return (
       <li className="CommentItem">
-        {<Link to={`/users/${author}`}>{author}</Link>} &middot; {created_at}{" "}
+        {<Link to={`/users/${author}`}>{author}</Link>} <br />
+        {date.toDateString() + " " + date.toTimeString()}
         <br />
         {body}
         <br />
-        Votes: {votes}{" "}
-        <button
-          onClick={() => {
-            this.incComment(comment_id, 1);
-          }}
-        >
-          ^
-        </button>
-        <button
-          onClick={() => {
-            this.incComment(comment_id, -1);
-          }}
-        >
-          v
-        </button>
+        <Voting votes={votes} comment_id={comment_id} />
         <br />
         {currentUser === author && (
           <button onClick={this.removeComment}>Delete</button>
@@ -40,21 +28,6 @@ class CommentItem extends Component {
       </li>
     );
   }
-  incComment = (comment_id, inc) => {
-    patchComments(comment_id, inc).then(comment => {
-      this.setState({ comment })
-        .catch(({ response }) => {
-          const { status } = response;
-          const { msg } = response.data;
-          this.setState({ err: { status, msg } });
-        })
-        .catch(({ response }) => {
-          const { status } = response;
-          const { msg } = response.data;
-          this.setState({ err: { status, msg } });
-        });
-    });
-  };
 
   removeComment = () => {
     deleteComment(this.state.comment.comment_id)

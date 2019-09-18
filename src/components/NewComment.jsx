@@ -12,7 +12,7 @@ class NewComment extends Component {
   };
   render() {
     const { err, comment } = this.state;
-    if (err) return <ErrorHandler err={err} />;
+    if (err) return <ErrorHandler {...err} />;
     if (comment) return <CommentItem comment={comment} />;
     return (
       <form onSubmit={this.sendComment}>
