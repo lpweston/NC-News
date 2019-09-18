@@ -12,7 +12,6 @@ class NewComment extends Component {
   };
   render() {
     const { err, comment, currentUser } = this.state;
-    if (err) return <ErrorHandler {...err} />;
     if (comment)
       return <CommentItem comment={comment} currentUser={currentUser} />;
     return (
@@ -23,6 +22,7 @@ class NewComment extends Component {
           onChange={this.handleClick}
         />
         <button>Submit</button>
+        {err && <ErrorHandler {...err} />}
       </form>
     );
   }

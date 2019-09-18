@@ -10,7 +10,6 @@ class CommentItem extends Component {
     const { comment_id, author, created_at, body, votes } = this.state.comment;
     const { err, deleted } = this.state;
     const { currentUser } = this.props;
-    if (err) return <ErrorHandler {...err} />;
     if (deleted) return <li className="CommentItem">Comment deleted</li>;
     const date = new Date(created_at);
     return (
@@ -18,13 +17,16 @@ class CommentItem extends Component {
         {<Link to={`/users/${author}`}>{author}</Link>} <br />
         {date.toDateString() + " " + date.toTimeString()}
         <br />
+        <br />
         {body}
+        <br />
         <br />
         <Voting votes={votes} comment_id={comment_id} />
         <br />
         {currentUser === author && (
           <button onClick={this.removeComment}>Delete</button>
         )}
+        {err && <ErrorHandler {...err} />}
       </li>
     );
   }

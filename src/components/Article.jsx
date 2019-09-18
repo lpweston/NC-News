@@ -50,7 +50,9 @@ class Article extends Component {
             <Link to={`/users/${author}`}>{author}</Link>
           </h3>
           <p>{date.toDateString() + " " + date.toTimeString()} </p>
+          <br />
           <p>{article.body}</p>
+          <br />
           {currentUser === author && (
             <button onClick={this.removeArticle}>Delete</button>
           )}
