@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { postUser } from "../utils/api";
 import ErrorHandler from "./ErrorHandler";
 import User from "./User";
+import SideBar from "./SideBar";
 
 class AddUser extends Component {
   state = {
@@ -15,37 +16,46 @@ class AddUser extends Component {
     const { username, name, avatar, err, newUser } = this.state;
     if (newUser) return <User user={newUser.username} />;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Add a new user</h2>
-        <label>
-          Username: *
-          <input
-            name="username"
-            onChange={this.handleUpdate}
-            value={username}
-          ></input>{" "}
-          Must be unique
-        </label>
-        <br />
-        <label>
-          Name: *
-          <input name="name" onChange={this.handleUpdate} value={name}></input>
-        </label>
-        <br />
-        <label>
-          Avatar URL:{" "}
-          <input
-            name="avatar"
-            onChange={this.handleUpdate}
-            value={avatar}
-          ></input>{" "}
-          Enter a valid url
-        </label>
-        <br />* required
-        <br />
-        <button>Submit</button>
-        {err && <ErrorHandler {...err} />}
-      </form>
+      <>
+        <SideBar />
+        <section>
+          <form onSubmit={this.handleSubmit}>
+            <h2>Add a new user</h2>
+            <label>
+              Username: *
+              <input
+                name="username"
+                onChange={this.handleUpdate}
+                value={username}
+              ></input>{" "}
+              Must be unique
+            </label>
+            <br />
+            <label>
+              Name: *
+              <input
+                name="name"
+                onChange={this.handleUpdate}
+                value={name}
+              ></input>
+            </label>
+            <br />
+            <label>
+              Avatar URL:{" "}
+              <input
+                name="avatar"
+                onChange={this.handleUpdate}
+                value={avatar}
+              ></input>{" "}
+              Enter a valid url
+            </label>
+            <br />* required
+            <br />
+            <button>Submit</button>
+            {err && <ErrorHandler {...err} />}
+          </form>
+        </section>
+      </>
     );
   }
   handleUpdate = e => {

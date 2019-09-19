@@ -1,7 +1,8 @@
 import React from "react";
 import TopicList from "./TopicList";
 import "../styles/panels.css";
-import MakeButtons from "./MakeButtons";
+import Nav from "./Nav";
+import Sort from "./Sort";
 
 const SideBar = ({ sortItems, item }) => {
   return (
@@ -11,20 +12,16 @@ const SideBar = ({ sortItems, item }) => {
       </h3>
       <TopicList />
       <div className="seperator" />
-      <h3>
-        <b>&lt;</b> Sort <b>/&gt;</b>
-      </h3>
-      <ul>
-        <li>Date {MakeButtons("created_at", sortItems)}</li>
-        <li>Popularity {MakeButtons("votes", sortItems)}</li>
-        {item === "articles" && (
-          <li>Comments {MakeButtons("comment_count", sortItems)}</li>
-        )}
-        {item === "articles" && (
-          <li>Title {MakeButtons("title", sortItems)}</li>
-        )}
-        <li>Author {MakeButtons("author", sortItems)}</li>
-      </ul>
+      <Nav />
+      <div className="seperator" />
+      {item && (
+        <>
+          <h3>
+            <b>&lt;</b> Sort <b>/&gt;</b>
+          </h3>
+          <Sort sortItems={sortItems} item={item} />{" "}
+        </>
+      )}
     </div>
   );
 };

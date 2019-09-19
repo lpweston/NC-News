@@ -1,10 +1,16 @@
 import React from "react";
+import SideBar from "./SideBar";
 
 const ErrorHandler = ({ status = 404, msg = "Page not found" }) => {
   return (
-    <p>
-      {status}:{msg}
-    </p>
+    <>
+      <SideBar />
+      <section>
+        <p>
+          {status}:{msg}
+        </p>{" "}
+      </section>
+    </>
   );
 };
 

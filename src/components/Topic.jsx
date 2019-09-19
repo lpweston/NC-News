@@ -20,7 +20,7 @@ class Topic extends Component {
     if (isLoading) return <Loading />;
     return (
       <div id="Topic">
-        <SideBar sortArticles={this.sortArticles} />
+        <SideBar sortItems={this.sortItems} item="articles" />
         <section>
           <h2>{topic[0].toUpperCase() + topic.slice(1)}</h2>
           <p>{description}</p>

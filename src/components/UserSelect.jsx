@@ -9,7 +9,7 @@ class UserSelect extends Component {
     const { usernames } = this.state;
     const { login } = this.props;
     return (
-      <div>
+      <div className="UserSelect">
         Logged in as: &nbsp;
         <select onChange={login}>
           {usernames.map(username => {

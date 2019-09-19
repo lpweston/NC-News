@@ -15,18 +15,20 @@ class NewComment extends Component {
     if (comment)
       return <CommentItem comment={comment} currentUser={currentUser} />;
     return (
-      <li className="CommentItem">
+      <div className="CommentItem">
         <h4>Post a comment: </h4>
-        <form onSubmit={this.sendComment}>
-          <input
+        <form onSubmit={this.sendComment} className="comment-form">
+          <textarea
             placeholder="Post new comment"
             value={this.state.body}
             onChange={this.handleClick}
+            row="3"
+            cols="50"
           />
           <button>Submit</button>
           {err && <ErrorHandler {...err} />}
         </form>
-      </li>
+      </div>
     );
   }
 

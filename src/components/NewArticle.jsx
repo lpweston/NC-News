@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getTopics } from "../utils/api";
+import SideBar from "./SideBar";
 
 class NewArticle extends Component {
   state = {
@@ -10,42 +11,55 @@ class NewArticle extends Component {
     err: null
   };
   render() {
-    console.log(this.state);
     const { title, body, selTopic, topics } = this.state;
     return (
-      <form>
-        <label>
-          Title:{" "}
-          <input
-            value={title}
-            name="title"
-            onChange={this.handleUpdate}
-          ></input>
-        </label>
-        <br />
-        <label>
-          Topic:
-          <select value={selTopic} onChange={this.handleUpdate} name="selTopic">
-            {topics.map(topic => {
-              return (
-                <option value={topic.slug} key={topic.slug}>
-                  {topic.slug}
-                </option>
-              );
-            })}
-            <option value="make new topic">make new topic</option>
-          </select>{" "}
-          <label>
-            Topic Name:<input disabled={selTopic !== "make new topic"}></input>
-          </label>
-        </label>
-        <br />
-        <label>
-          Body:{" "}
-          <input value={body} name="body" onChange={this.handleUpdate}></input>
-        </label>
-        <button>Submit</button>
-      </form>
+      <>
+        <SideBar />
+        <section>
+          <form>
+            <label>
+              Title:{" "}
+              <input
+                value={title}
+                name="title"
+                onChange={this.handleUpdate}
+              ></input>
+            </label>
+            <br />
+            <label>
+              Topic:
+              <select
+                value={selTopic}
+                onChange={this.handleUpdate}
+                name="selTopic"
+              >
+                {topics.map(topic => {
+                  return (
+                    <option value={topic.slug} key={topic.slug}>
+                      {topic.slug}
+                    </option>
+                  );
+                })}
+                <option value="make new topic">make new topic</option>
+              </select>{" "}
+              <label>
+                Topic Name:
+                <input disabled={selTopic !== "make new topic"}></input>
+              </label>
+            </label>
+            <br />
+            <label>
+              Body:{" "}
+              <input
+                value={body}
+                name="body"
+                onChange={this.handleUpdate}
+              ></input>
+            </label>
+            <button>Submit</button>
+          </form>
+        </section>
+      </>
     );
   }
 

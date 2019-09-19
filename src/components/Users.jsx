@@ -3,6 +3,7 @@ import { getUsers } from "../utils/api";
 import { Link } from "@reach/router";
 import ErrorHandler from "./ErrorHandler";
 import Loading from "./Loading";
+import SideBar from "./SideBar";
 
 class Users extends Component {
   state = {
@@ -15,27 +16,32 @@ class Users extends Component {
     if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     return (
-      <div id="users">
-        <h2>Users</h2>
-        <Link to="/newuser">Add New User</Link>
-        <ul id="usersList">
-          {users.map(user => {
-            return (
-              <li key={user.username} className="user">
-                <img src={user.avatar_url} width="100px" alt="avatar" />
-                <div>
-                  <Link to={`/users/${user.username}`}>
-                    {user.username} <br />
-                  </Link>
-                  Name: {user.name}
-                  <br />
-                  Articles: {user.article_count}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <>
+        <SideBar />
+        <section>
+          <div id="users">
+            <h2>Users</h2>
+            <Link to="/newuser">Add New User</Link>
+            <ul id="usersList">
+              {users.map(user => {
+                return (
+                  <li key={user.username} className="user">
+                    <img src={user.avatar_url} width="100px" alt="avatar" />
+                    <div>
+                      <Link to={`/users/${user.username}`}>
+                        {user.username} <br />
+                      </Link>
+                      Name: {user.name}
+                      <br />
+                      Articles: {user.article_count}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>{" "}
+      </>
     );
   }
   componentDidMount = () => {
