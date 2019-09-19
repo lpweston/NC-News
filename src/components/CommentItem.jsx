@@ -19,8 +19,8 @@ class CommentItem extends Component {
     const date = new Date(created_at);
     return (
       <li className="CommentItem">
-        <img src={avatar_url} width="50px" height="50px" alt="avatar" />
-        <div>
+        <img src={avatar_url} alt="avatar" />
+        <div className="text-content">
           <Link to={`/users/${author}`}>{author}</Link> <br />
           {date.toDateString() + " " + date.toTimeString()}
           <br />

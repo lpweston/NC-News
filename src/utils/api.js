@@ -4,11 +4,18 @@ const request = axios.create({
   baseURL: "https://news-northcoders.herokuapp.com/api"
 });
 
-export const getArticles = async ({ author, topic, sort_by, order }) => {
+export const getArticles = async ({
+  author,
+  topic,
+  sort_by,
+  order,
+  limit,
+  p
+}) => {
   const res = await request.get("/articles", {
-    params: { author, topic, sort_by, order }
+    params: { author, topic, sort_by, order, limit, p }
   });
-  return res.data.articles;
+  return res.data;
 };
 
 export const getArticle = async article_id => {

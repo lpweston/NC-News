@@ -1,15 +1,14 @@
 import React from "react";
 import TopicList from "./TopicList";
-import "../styles/header.css";
-
+import "../styles/panels.css";
 const makeButtons = (sortParam, sortArticles) => {
   return (
     <>
       <button value={sortParam + " asc"} onClick={sortArticles}>
-        ^
+        &and;
       </button>
       <button value={sortParam + " desc"} onClick={sortArticles}>
-        v
+        &or;
       </button>
     </>
   );
@@ -17,9 +16,14 @@ const makeButtons = (sortParam, sortArticles) => {
 const SideBar = ({ sortArticles }) => {
   return (
     <div className="sidebar">
-      <h3>Topics</h3>
+      <h3>
+        <b>&lt;</b> Topics <b>/&gt;</b>
+      </h3>
       <TopicList />
-      <h3>Sort</h3>
+      <hr />
+      <h3>
+        <b>&lt;</b> Sort <b>/&gt;</b>
+      </h3>
       <li>Date {makeButtons("created_at", sortArticles)}</li>
       <li>Popularity {makeButtons("votes", sortArticles)}</li>
       <li>Comments {makeButtons("comment_count", sortArticles)}</li>

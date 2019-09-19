@@ -1,15 +1,24 @@
 body {
-  background-color: rgb(150, 150, 150);
+  background-color: #ededed;
+}
+
+b {
+  color: #ba1f31;
+  font-weight: bold;
+}
+
+a {
+  color: #ba1f31;
 }
 
 section {
   padding: 30px;
   flex-grow: 1;
-  background-color: rgb(204, 204, 204);
+  background-color: rgb(202, 202, 202);
 }
 
 #users {
-  background-color: rgb(206, 206, 206);
+  background-color: rgb(202, 202, 202);
 }
 
 #usersList {
@@ -20,20 +29,31 @@ section {
 .user {
   margin: 15px;
   padding: 15px;
-  background-color: rgb(150, 150, 150);
+  background-color: #ededed;
   display: flex;
   width: 40%;
   flex-grow: 1;
 }
 .ArticleItem,
 .CommentItem {
-  margin: 15px;
-  padding: 15px;
-  background-color: rgb(150, 150, 150);
+  margin: 10px;
+  padding: 10px;
+  background-color: #ededed;
+  display: flex;
 }
 
-.CommentItem {
-  display: flex;
+.text-content {
+  padding-left: 20px;
+}
+
+section {
+  padding: 3%;
+}
+
+img {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
 }
 
 /*p  {
@@ -55,7 +75,8 @@ li {
 button {
   border: 0;
   background: transparent;
-  color: white;
+  color: #ba1f31;
+  font-weight: bold;
 }
 
 @media (min-width: 777px) {
@@ -63,5 +84,10 @@ button {
   #Topic,
   .Article {
     display: flex;
+  }
+  img {
+    margin: 5px;
+    width: 80px;
+    height: 80px;
   }
 }
