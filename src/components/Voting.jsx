@@ -19,7 +19,7 @@ class Voting extends Component {
             this.incComment(1);
           }}
         >
-          <r>&and;</r>
+          <b>&and;</b>
         </button>
         <button
           disabled={change <= -1}
@@ -27,7 +27,7 @@ class Voting extends Component {
             this.incComment(-1);
           }}
         >
-          <r>&or;</r>
+          <b>&or;</b>
         </button>
         {err && <ErrorHandler {...err} />}
       </>

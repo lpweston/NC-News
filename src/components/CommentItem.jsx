@@ -56,6 +56,8 @@ class CommentItem extends Component {
       this.setState({ avatar_url: user.avatar_url });
     });
   };
+
+  componentDidUpdate = prevProps => {};
 }
 
 export default CommentItem;

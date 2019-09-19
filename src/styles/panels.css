@@ -5,7 +5,7 @@ header {
   grid-template-rows: 1fr 1fr;
   background-color: #202829;
   border-bottom: 4px solid grey;
-  color: white;
+  color: rgb(196, 196, 196);
   font-weight: bold;
 }
 
@@ -18,12 +18,14 @@ nav {
 
 header a,
 .sidebar a {
-  color: rgb(196, 196, 196);
+  color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
 h1 {
+  text-align: right;
+  padding-right: 70px;
   grid-row: 1 / span 2;
 }
 
@@ -33,7 +35,7 @@ h3 {
 }
 
 .sidebar {
-  color: white;
+  color: rgb(196, 196, 196);
   border-bottom: 4px solid grey;
   background-color: #202829;
   display: flex;
@@ -42,10 +44,23 @@ h3 {
   font-weight: bold;
 }
 
+.seperator {
+  width: 100%;
+  height: 10px;
+}
+
 @media (min-width: 777px) {
   .sidebar {
+    padding-top: 100px;
+    position: fixed;
     border-right: 4px solid grey;
     display: block;
     width: 10em;
+    height: 100%;
+    top: 0;
+  }
+  .seperator {
+    width: 0px;
+    height: 30px;
   }
 }

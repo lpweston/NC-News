@@ -35,7 +35,10 @@ export const deleteArticle = article_id => {
 export const getTopics = async topic => {
   const res = await request.get("/topics");
   if (topic) {
-    return res.data.topics.filter(({ slug }) => slug === topic)[0];
+    const result = res.data.topics.filter(({ slug }) => slug === topic)[0];
+    if (result) return result;
+    const err = { status: 404, msg: "Topic not found" };
+    throw err;
   }
   return res.data.topics;
 };
@@ -55,9 +58,16 @@ export const postUser = async (username, name, avatar_url) => {
   return res.data.user;
 };
 
-export const getComments = async article_id => {
-  const res = await request.get(`/articles/${article_id}/comments`);
-  return res.data.comments;
+export const getComments = async (article_id, sort_by, order, limit, p) => {
+  const res = await request.get(`/articles/${article_id}/comments`, {
+    params: {
+      sort_by,
+      order,
+      limit,
+      p
+    }
+  });
+  return res.data;
 };
 
 export const patchComments = async (comment_id, inc_votes) => {

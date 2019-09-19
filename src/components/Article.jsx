@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import { getArticle, patchArticle, deleteArticle, getUser } from "../utils/api";
-import NewComment from "./NewComment";
 import CommentList from "./CommentList";
 import SideBar from "./SideBar";
 import ErrorHandler from "./ErrorHandler";
@@ -14,35 +13,38 @@ class Article extends Component {
     isLoading: true,
     err: null,
     deleted: false,
-    avatar_url: ""
+    avatar_url: "",
+    sort_by: undefined,
+    order: undefined
   };
   render() {
-    const { article, isLoading, err, deleted, avatar_url } = this.state;
+    const {
+      article,
+      isLoading,
+      err,
+      deleted,
+      avatar_url,
+      sort_by,
+      order
+    } = this.state;
     const { currentUser } = this.props;
     if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     if (deleted) {
       return (
         <div className="Article">
-          <SideBar />
+          <SideBar sortItems={this.sortItems} />
           <section className="Article-section">
             <p>Deleted article</p>
           </section>
         </div>
       );
     }
-    const {
-      title,
-      author,
-      created_at,
-      votes,
-      comment_count,
-      article_id
-    } = article;
+    const { title, author, created_at, votes, article_id } = article;
     const date = new Date(created_at);
     return (
       <main className="Article">
-        <SideBar />
+        <SideBar sortItems={this.sortItems} item="comments" />
         <section className="Article-section">
           <h2>{title}</h2>
           <h3>
@@ -54,16 +56,13 @@ class Article extends Component {
           {currentUser === author && (
             <button onClick={this.removeArticle}>Delete</button>
           )}
-          <p>Comments: {comment_count} </p>
-          <Voting votes={votes} article_id={article_id} />
+          <Voting votes={votes} article_id={article_id} /> <hr />
           <h3>Comments:</h3>
-          <NewComment
-            currentUser={this.props.currentUser}
-            article_id={article_id}
-          />
           <CommentList
             article_id={article.article_id}
             currentUser={this.props.currentUser}
+            sort_by={sort_by}
+            order={order}
           />
         </section>
       </main>
@@ -108,6 +107,10 @@ class Article extends Component {
         const { msg } = response.data;
         this.setState({ err: { status, msg } });
       });
+  };
+  sortItems = e => {
+    const pair = e.target.value.split(" ");
+    this.setState({ sort_by: pair[0], order: pair[1] });
   };
 }
 

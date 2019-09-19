@@ -15,7 +15,7 @@ class ArticleList extends Component {
     limit: 10
   };
   render() {
-    const { articles, isLoading, err, page, totalPages } = this.state;
+    const { articles, isLoading, err, page, totalPages, limit } = this.state;
     if (err) return <ErrorHandler {...err} />;
     return isLoading ? (
       <Loading />
@@ -25,6 +25,8 @@ class ArticleList extends Component {
           page={page}
           totalPages={totalPages}
           changePage={this.changePage}
+          limit={limit}
+          changeLimit={this.changeLimit}
         />
         {articles.map(article => {
           return <ArticleItem article={article} key={article.article_id} />;
@@ -43,13 +45,15 @@ class ArticleList extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.page !== this.state.page) {
+    const { page, limit } = this.state;
+    const { sort_by, order } = this.props;
+    if (
+      prevState.page !== page ||
+      prevState.limit !== limit ||
+      prevProps.sort_by !== sort_by ||
+      prevProps.order !== order
+    ) {
       this.fetchArticles();
-    }
-    for (const key in prevProps) {
-      if (prevProps[key] !== this.props[key]) {
-        this.fetchArticles();
-      }
     }
   };
 
@@ -70,6 +74,10 @@ class ArticleList extends Component {
     this.setState(({ page }) => {
       return { page: page + inc };
     });
+  };
+  changeLimit = e => {
+    const limit = e.target.value;
+    this.setState({ limit });
   };
 }
 

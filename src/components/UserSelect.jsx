@@ -12,15 +12,15 @@ class UserSelect extends Component {
       <div>
         Logged in as: &nbsp;
         <select onChange={login}>
-          <option value="guest" defaultValue>
-            guest
-          </option>
           {usernames.map(username => {
-            return (
-              <option value={username} key={username}>
-                {username}
-              </option>
-            );
+            if (username === "guest") {
+              return (
+                <option key={username} selected>
+                  {username}
+                </option>
+              );
+            }
+            return <option key={username}>{username}</option>;
           })}
         </select>
       </div>

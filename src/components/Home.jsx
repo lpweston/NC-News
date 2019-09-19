@@ -5,13 +5,14 @@ import SideBar from "./SideBar";
 class Home extends Component {
   state = {
     sort_by: undefined,
-    order: undefined
+    order: undefined,
+    limit: undefined
   };
   render() {
-    const { sort_by, order } = this.state;
+    const { sort_by, order, limit } = this.state;
     return (
       <main id="Home">
-        <SideBar sortArticles={this.sortArticles} />
+        <SideBar sortItems={this.sortItems} item="articles" />
         <section>
           <h2>Articles</h2>
           {sort_by && (
@@ -19,12 +20,12 @@ class Home extends Component {
               Sorted by: {sort_by} {order}
             </p>
           )}
-          <ArticleList sort_by={sort_by} order={order} />
+          <ArticleList sort_by={sort_by} order={order} limit={limit} />
         </section>
       </main>
     );
   }
-  sortArticles = e => {
+  sortItems = e => {
     const pair = e.target.value.split(" ");
     this.setState({ sort_by: pair[0], order: pair[1] });
   };

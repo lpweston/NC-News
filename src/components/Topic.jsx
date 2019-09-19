@@ -54,9 +54,15 @@ class Topic extends Component {
           isLoading: false
         });
       })
-      .catch(({ response }) => {
-        const { status } = response;
-        const { msg } = response.data;
+      .catch(err => {
+        let status, msg;
+        if (err.status) {
+          status = err.status;
+          msg = err.msg;
+        } else {
+          status = err.response.status;
+          msg = err.response.data.msg;
+        }
         this.setState({ err: { status, msg }, isLoading: false });
       });
   };

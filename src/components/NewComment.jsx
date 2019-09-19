@@ -15,15 +15,18 @@ class NewComment extends Component {
     if (comment)
       return <CommentItem comment={comment} currentUser={currentUser} />;
     return (
-      <form onSubmit={this.sendComment}>
-        <input
-          placeholder="Post new comment"
-          value={this.state.body}
-          onChange={this.handleClick}
-        />
-        <button>Submit</button>
-        {err && <ErrorHandler {...err} />}
-      </form>
+      <li className="CommentItem">
+        <h4>Post a comment: </h4>
+        <form onSubmit={this.sendComment}>
+          <input
+            placeholder="Post new comment"
+            value={this.state.body}
+            onChange={this.handleClick}
+          />
+          <button>Submit</button>
+          {err && <ErrorHandler {...err} />}
+        </form>
+      </li>
     );
   }
 
