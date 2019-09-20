@@ -64,8 +64,8 @@ class CommentItem extends Component {
     const { author, body, created_at } = this.props.comment;
     const { article_id } = this.props;
     postComment(article_id, author, body, created_at)
-      .then(() => {
-        this.setState({ deleted: false });
+      .then(comment => {
+        this.setState({ deleted: false, comment });
       })
       .catch(({ response }) => {
         const { status } = response;

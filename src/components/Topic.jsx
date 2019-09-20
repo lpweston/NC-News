@@ -16,7 +16,7 @@ class Topic extends Component {
   };
   render() {
     const { topic, description, sort_by, order, err, isLoading } = this.state;
-    if (err) return <ErrorHandler {...err} />;
+    if (err) return <ErrorHandler {...err} needSidebar={true} />;
     if (isLoading) return <Loading />;
     return (
       <div id="Topic">

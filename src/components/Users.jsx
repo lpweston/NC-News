@@ -13,7 +13,7 @@ class Users extends Component {
   };
   render() {
     const { users, isLoading, err } = this.state;
-    if (err) return <ErrorHandler {...err} />;
+    if (err) return <ErrorHandler {...err} needSidebar={true} />;
     if (isLoading) return <Loading />;
     return (
       <>

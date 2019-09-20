@@ -28,7 +28,7 @@ class App extends Component {
           <Users path="/users" />
           <User path="/users/:user" />
           <AddUser path="/newuser" currentUser={this.state.currentUser} />
-          <ErrorHandler default />
+          <ErrorHandler default needSidebar={true} />
         </Router>
       </div>
     );

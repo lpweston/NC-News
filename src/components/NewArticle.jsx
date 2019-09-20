@@ -22,7 +22,7 @@ class NewArticle extends Component {
       );
     }
     if (err) {
-      return <ErrorHandler {...err} />;
+      return <ErrorHandler {...err} needSidebar={true} />;
     }
     return (
       <>

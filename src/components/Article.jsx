@@ -28,7 +28,7 @@ class Article extends Component {
       order
     } = this.state;
     const { currentUser } = this.props;
-    if (err) return <ErrorHandler {...err} />;
+    if (err) return <ErrorHandler {...err} needSidebar={true} />;
     if (isLoading) return <Loading />;
     if (deleted) {
       return (

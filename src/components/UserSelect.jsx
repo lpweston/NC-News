@@ -3,21 +3,23 @@ import { getUsers } from "../utils/api";
 
 class UserSelect extends Component {
   state = {
-    usernames: []
+    usernames: ["guest"],
+    selected: "guest"
   };
   render() {
-    const { usernames } = this.state;
+    const { usernames, selected } = this.state;
     const { login } = this.props;
     return (
       <div className="UserSelect">
         Logged in as: &nbsp;
-        <select onChange={login} defaultValue="guest">
-          <option>guest</option>
-          {usernames
-            .filter(username => username !== "guest")
-            .map(username => {
-              return <option key={username}>{username}</option>;
-            })}
+        <select onChange={login} defaultValue={selected}>
+          {usernames.map(username => {
+            return (
+              <option value={username} key={username}>
+                {username}
+              </option>
+            );
+          })}
         </select>
       </div>
     );

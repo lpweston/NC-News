@@ -52,7 +52,7 @@ class AddUser extends Component {
             <br />* required
             <br />
             <button>Submit</button>
-            {err && <ErrorHandler {...err} />}
+            {err && <ErrorHandler {...err} needSidebar={true} />}
           </form>
         </section>
       </>

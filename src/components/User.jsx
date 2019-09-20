@@ -14,7 +14,7 @@ class User extends Component {
   render() {
     const { user, isLoading, err } = this.state;
     if (isLoading) return <Loading />;
-    if (err) return <ErrorHandler {...err} />;
+    if (err) return <ErrorHandler {...err} needSidebar={true} />;
     return (
       <>
         <SideBar />

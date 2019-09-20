@@ -35,7 +35,8 @@ section {
   padding: 10px;
   background-color: rgb(216, 216, 216);
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 60px auto;
+  align-items: center;
 }
 
 section {
@@ -75,5 +76,9 @@ button {
   }
   section {
     padding-left: 220px;
+  }
+
+  .CommentItem {
+    grid-template-columns: 100px auto;
   }
 }
