@@ -1,6 +1,6 @@
 # NC-News Front End
 
-This project is to design the front end for a NorthCoders discussion board.
+This project is to design the front end for a NorthCoders discussion board. It has been [deployed here](https://news-nc.netlify.com/), please feel free to play around with it.
 
 The back-end is [hosted here](https://news-northcoders.herokuapp.com/api) and the [git repository is here](https://github.com/lpweston/nc-news-BE).
 
