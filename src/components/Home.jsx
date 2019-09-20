@@ -5,11 +5,10 @@ import SideBar from "./SideBar";
 class Home extends Component {
   state = {
     sort_by: undefined,
-    order: undefined,
-    limit: undefined
+    order: undefined
   };
   render() {
-    const { sort_by, order, limit } = this.state;
+    const { sort_by, order } = this.state;
     return (
       <main id="Home">
         <SideBar sortItems={this.sortItems} item="articles" />
@@ -20,7 +19,7 @@ class Home extends Component {
               Sorted by: {sort_by} {order}
             </p>
           )}
-          <ArticleList sort_by={sort_by} order={order} limit={limit} />
+          <ArticleList sort_by={sort_by} order={order} />
         </section>
       </main>
     );

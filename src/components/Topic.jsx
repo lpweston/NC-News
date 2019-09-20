@@ -24,13 +24,18 @@ class Topic extends Component {
         <section>
           <h2>{topic[0].toUpperCase() + topic.slice(1)}</h2>
           <p>{description}</p>
+          {sort_by && (
+            <p>
+              Sorted by: {sort_by} {order}
+            </p>
+          )}
           <ArticleList topic={topic} sort_by={sort_by} order={order} />
         </section>
       </div>
     );
   }
 
-  sortArticles = e => {
+  sortItems = e => {
     const pair = e.target.value.split(" ");
     this.setState({ sort_by: pair[0], order: pair[1] });
   };

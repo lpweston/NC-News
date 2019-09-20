@@ -13,7 +13,13 @@ class NewComment extends Component {
   render() {
     const { err, comment, currentUser } = this.state;
     if (comment)
-      return <CommentItem comment={comment} currentUser={currentUser} />;
+      return (
+        <CommentItem
+          comment={comment}
+          currentUser={currentUser}
+          article_id={this.props.article_id}
+        />
+      );
     return (
       <div className="CommentItem">
         <h4>Post a comment: </h4>

@@ -1,22 +1,34 @@
 import React, { Component } from "react";
-import { getTopics } from "../utils/api";
+import { getTopics, postArticle } from "../utils/api";
 import SideBar from "./SideBar";
+import Article from "./Article";
+import ErrorHandler from "./ErrorHandler";
 
 class NewArticle extends Component {
   state = {
     title: "",
     body: "",
-    selTopic: "make new topic",
+    selTopic: "coding",
     topics: [],
-    err: null
+    err: null,
+    article_id: undefined
   };
   render() {
-    const { title, body, selTopic, topics } = this.state;
+    const { title, body, selTopic, topics, article_id, err } = this.state;
+
+    if (article_id) {
+      return (
+        <Article article={article_id} currentUser={this.props.currentUser} />
+      );
+    }
+    if (err) {
+      return <ErrorHandler {...err} />;
+    }
     return (
       <>
         <SideBar />
         <section>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label>
               Title:{" "}
               <input
@@ -26,8 +38,9 @@ class NewArticle extends Component {
               ></input>
             </label>
             <br />
+            <br />
             <label>
-              Topic:
+              Topic:{" "}
               <select
                 value={selTopic}
                 onChange={this.handleUpdate}
@@ -40,22 +53,22 @@ class NewArticle extends Component {
                     </option>
                   );
                 })}
-                <option value="make new topic">make new topic</option>
-              </select>{" "}
-              <label>
-                Topic Name:
-                <input disabled={selTopic !== "make new topic"}></input>
-              </label>
+              </select>
             </label>
+            <br />
             <br />
             <label>
               Body:{" "}
-              <input
+              <textarea
                 value={body}
                 name="body"
                 onChange={this.handleUpdate}
-              ></input>
+                row="10"
+                cols="50"
+              />
             </label>
+            <br />
+            <br />
             <button>Submit</button>
           </form>
         </section>
@@ -79,14 +92,20 @@ class NewArticle extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   const { studentName, startingCohort } = this.state;
-  //   sendStudent(studentName, startingCohort).then(student => {
-  //     //this.props.updateStudent(student);
-  //     this.setState({ studentName: "", startingCohort: "" });
-  //   });
-  // };
+  handleSubmit = e => {
+    e.preventDefault();
+    const { title, selTopic, body } = this.state;
+    const { currentUser } = this.props;
+    postArticle({ title, topic: selTopic, body, username: currentUser })
+      .then(({ article_id }) => {
+        this.setState({ article_id });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg }, isLoading: false });
+      });
+  };
 }
 
 export default NewArticle;

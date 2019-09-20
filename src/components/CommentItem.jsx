@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import ErrorHandler from "./ErrorHandler";
-import { deleteComment, getUser } from "../utils/api";
+import { getUser, deleteComment, postComment } from "../utils/api";
 import Voting from "./Voting";
 
 class CommentItem extends Component {
@@ -15,7 +15,12 @@ class CommentItem extends Component {
     const { comment_id, author, created_at, body, votes } = this.state.comment;
     const { err, deleted, avatar_url } = this.state;
     const { currentUser } = this.props;
-    if (deleted) return <li className="CommentItem">Comment deleted</li>;
+    if (deleted)
+      return (
+        <li className="CommentItem">
+          Comment deleted <br /> <button onClick={this.undoDelete}>Undo</button>
+        </li>
+      );
     const date = new Date(created_at);
     return (
       <li className="CommentItem">
@@ -51,13 +56,26 @@ class CommentItem extends Component {
       });
   };
 
+  undoDelete = () => {
+    const { author, body, created_at } = this.props.comment;
+    const { article_id } = this.props;
+    console.log(this.props);
+    postComment(article_id, author, body, created_at)
+      .then(() => {
+        this.setState({ deleted: false });
+      })
+      .catch(({ response }) => {
+        const { status } = response;
+        const { msg } = response.data;
+        this.setState({ err: { status, msg } });
+      });
+  };
+
   componentDidMount = () => {
     getUser(this.state.comment.author).then(user => {
       this.setState({ avatar_url: user.avatar_url });
     });
   };
-
-  componentDidUpdate = prevProps => {};
 }
 
 export default CommentItem;

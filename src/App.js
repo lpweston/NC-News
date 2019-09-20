@@ -24,10 +24,10 @@ class App extends Component {
             path="/articles/:article"
             currentUser={this.state.currentUser}
           />
-          <NewArticle path="/newarticle" />
+          <NewArticle path="/newarticle" currentUser={this.state.currentUser} />
           <Users path="/users" />
           <User path="/users/:user" />
-          <AddUser path="/newuser" />
+          <AddUser path="/newuser" currentUser={this.state.currentUser} />
           <ErrorHandler default />
         </Router>
       </div>

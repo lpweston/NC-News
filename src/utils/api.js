@@ -28,8 +28,16 @@ export const patchArticle = async (article_id, inc_votes) => {
   return res.data.article;
 };
 
-export const deleteArticle = article_id => {
-  return request.delete(`/articles/${article_id}`);
+export const postArticle = async ({ title, topic, body, username }) => {
+  console.log(title, topic, body, username);
+  const res = await request.post(`/articles/`, {
+    title,
+    topic,
+    body,
+    username
+  });
+  console.log(res.data.article);
+  return res.data.article;
 };
 
 export const getTopics = async topic => {
@@ -85,4 +93,8 @@ export const postComment = async (article_id, username, body) => {
 
 export const deleteComment = comment_id => {
   return request.delete(`/comments/${comment_id}`);
+};
+
+export const deleteArticle = article_id => {
+  return request.delete(`/articles/${article_id}`);
 };

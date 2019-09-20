@@ -17,6 +17,7 @@ class CommentList extends Component {
   };
   render() {
     const { comments, isLoading, err, p, totalPages, limit } = this.state;
+    const { article_id, currentUser } = this.props;
     if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     return (
@@ -28,16 +29,14 @@ class CommentList extends Component {
           limit={limit}
           changeLimit={this.changeLimit}
         />
-        <NewComment
-          currentUser={this.props.currentUser}
-          article_id={this.props.article_id}
-        />
+        <NewComment currentUser={currentUser} article_id={article_id} />
         {comments.map(comment => {
           return (
             <CommentItem
               comment={comment}
               key={comment.comment_id}
-              currentUser={this.props.currentUser}
+              currentUser={currentUser}
+              article_id={article_id}
             />
           );
         })}

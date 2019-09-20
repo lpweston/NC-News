@@ -56,8 +56,14 @@ class Article extends Component {
           {currentUser === author && (
             <button onClick={this.removeArticle}>Delete</button>
           )}
+          <br />
           <Voting votes={votes} article_id={article_id} /> <hr />
           <h3>Comments:</h3>
+          {sort_by && (
+            <p>
+              Sorted by: {sort_by} {order}
+            </p>
+          )}
           <CommentList
             article_id={article.article_id}
             currentUser={this.props.currentUser}
@@ -97,6 +103,7 @@ class Article extends Component {
         this.setState({ err: { status, msg }, isLoading: false });
       });
   };
+
   removeArticle = () => {
     deleteArticle(this.state.article.article_id)
       .then(() => {
@@ -108,6 +115,7 @@ class Article extends Component {
         this.setState({ err: { status, msg } });
       });
   };
+
   sortItems = e => {
     const pair = e.target.value.split(" ");
     this.setState({ sort_by: pair[0], order: pair[1] });
