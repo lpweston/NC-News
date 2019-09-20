@@ -21,16 +21,20 @@ class Topic extends Component {
     return (
       <div id="Topic">
         <SideBar sortItems={this.sortItems} item="articles" />
-        <section>
-          <h2>{topic[0].toUpperCase() + topic.slice(1)}</h2>
-          <p>{description}</p>
-          {sort_by && (
-            <p>
-              Sorted by: {sort_by} {order}
-            </p>
-          )}
-          <ArticleList topic={topic} sort_by={sort_by} order={order} />
-        </section>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <section>
+            <h2>{topic[0].toUpperCase() + topic.slice(1)}</h2>
+            <p>{description}</p>
+            {sort_by && (
+              <p>
+                Sorted by: {sort_by} {order}
+              </p>
+            )}
+            <ArticleList topic={topic} sort_by={sort_by} order={order} />
+          </section>
+        )}
       </div>
     );
   }
