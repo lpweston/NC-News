@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import ErrorHandler from "./ErrorHandler";
 import { getUser, deleteComment, postComment } from "../utils/api";
 import Voting from "./Voting";
+import Delete from "../icons/Delete";
 
 class CommentItem extends Component {
   state = {
@@ -18,7 +19,10 @@ class CommentItem extends Component {
     if (deleted)
       return (
         <li className="CommentItem">
-          Comment deleted <br /> <button onClick={this.undoDelete}>Undo</button>
+          <Delete />
+          <p>
+            Comment deleted <button onClick={this.undoDelete}>Undo</button>
+          </p>
         </li>
       );
     const date = new Date(created_at);
@@ -59,7 +63,6 @@ class CommentItem extends Component {
   undoDelete = () => {
     const { author, body, created_at } = this.props.comment;
     const { article_id } = this.props;
-    console.log(this.props);
     postComment(article_id, author, body, created_at)
       .then(() => {
         this.setState({ deleted: false });

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { postComment } from "../utils/api";
 import ErrorHandler from "./ErrorHandler";
 import CommentItem from "./CommentItem";
+import New from "../icons/New";
 
 class NewComment extends Component {
   state = {
@@ -22,8 +23,10 @@ class NewComment extends Component {
       );
     return (
       <div className="CommentItem">
-        <h4>Post a comment: </h4>
-        <form onSubmit={this.sendComment} className="comment-form">
+        <New />
+        <form onSubmit={this.sendComment}>
+          Post a comment: <br />
+          <br />
           <textarea
             placeholder="Post new comment"
             value={this.state.body}

@@ -21,9 +21,9 @@ const Pages = ({ page, totalPages, changePage, changeLimit }) => {
         <b>&gt;</b>
       </button>{" "}
       Items per page:{" "}
-      <select onChange={changeLimit}>
+      <select onChange={changeLimit} defaultValue="10">
         <option>5</option>
-        <option selected>10</option>
+        <option>10</option>
         <option>20</option>
       </select>
     </>
@@ -31,3 +31,11 @@ const Pages = ({ page, totalPages, changePage, changeLimit }) => {
 };
 
 export default Pages;
+
+/* 
+      <select onChange={changeLimit}>
+        <option>5</option>
+        <option selected>10</option>
+        <option>20</option>
+      </select>
+*/

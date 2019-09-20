@@ -65,15 +65,17 @@ class AddUser extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { username, name, avatar } = this.state;
-    postUser(username, name, avatar)
-      .then(newUser => {
-        this.setState({ username: "", name: "", avatar: "", newUser });
-      })
-      .catch(({ response }) => {
-        const { status } = response;
-        const { msg } = response.data;
-        this.setState({ err: { status, msg }, isLoading: false });
-      });
+    if (username.length > 0 && name.length > 0) {
+      postUser(username, name, avatar)
+        .then(newUser => {
+          this.setState({ username: "", name: "", avatar: "", newUser });
+        })
+        .catch(({ response }) => {
+          const { status } = response;
+          const { msg } = response.data;
+          this.setState({ err: { status, msg }, isLoading: false });
+        });
+    }
   };
 }
 
