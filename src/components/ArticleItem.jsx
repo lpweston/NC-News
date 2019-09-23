@@ -14,7 +14,7 @@ const ArticleItem = props => {
       {article.topic === "cooking" && <Food />}
       <div className="text-content">
         <Link to={`/articles/${article.article_id}`}>
-          <h4>{article.title}</h4>
+          <h3>{article.title}</h3>
         </Link>
         <p>
           <Link to={`/users/${article.author}`}>{article.author}</Link> &middot;

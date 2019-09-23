@@ -11,16 +11,18 @@ class UserSelect extends Component {
     const { login } = this.props;
     return (
       <div className="UserSelect">
-        Logged in as: &nbsp;
-        <select onChange={login} defaultValue={selected}>
-          {usernames.map(username => {
-            return (
-              <option value={username} key={username}>
-                {username}
-              </option>
-            );
-          })}
-        </select>
+        <label>
+          Logged in as: &nbsp;
+          <select onChange={login} defaultValue={selected}>
+            {usernames.map(username => {
+              return (
+                <option value={username} key={username}>
+                  {username}
+                </option>
+              );
+            })}
+          </select>
+        </label>
       </div>
     );
   }

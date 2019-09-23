@@ -7,18 +7,18 @@ import Sort from "./Sort";
 const SideBar = ({ sortItems, item }) => {
   return (
     <div className="sidebar">
-      <h3>
+      <h2>
         <b>&lt;</b> Topics <b>/&gt;</b>
-      </h3>
+      </h2>
       <TopicList />
       <div className="seperator" />
       <Nav />
       <div className="seperator" />
       {item && (
         <>
-          <h3>
+          <h2>
             <b>&lt;</b> Sort <b>/&gt;</b>
-          </h3>
+          </h2>
           <Sort sortItems={sortItems} item={item} />{" "}
         </>
       )}

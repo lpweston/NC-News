@@ -20,7 +20,7 @@ class ArticleList extends Component {
     return isLoading ? (
       <Loading />
     ) : (
-      <ul className="articlelist">
+      <>
         <Pages
           page={page}
           totalPages={totalPages}
@@ -28,15 +28,17 @@ class ArticleList extends Component {
           limit={limit}
           changeLimit={this.changeLimit}
         />
-        {articles.map(article => {
-          return <ArticleItem article={article} key={article.article_id} />;
-        })}
+        <ul className="articlelist">
+          {articles.map(article => {
+            return <ArticleItem article={article} key={article.article_id} />;
+          })}
+        </ul>
         <Pages
           page={page}
           totalPages={totalPages}
           changePage={this.changePage}
         />
-      </ul>
+      </>
     );
   }
 

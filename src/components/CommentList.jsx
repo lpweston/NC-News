@@ -21,7 +21,7 @@ class CommentList extends Component {
     if (err) return <ErrorHandler {...err} />;
     if (isLoading) return <Loading />;
     return (
-      <ul>
+      <>
         <Pages
           page={p}
           totalPages={totalPages}
@@ -29,17 +29,19 @@ class CommentList extends Component {
           limit={limit}
           changeLimit={this.changeLimit}
         />
-        <NewComment currentUser={currentUser} article_id={article_id} />
-        {comments.map(comment => {
-          return (
-            <CommentItem
-              comment={comment}
-              key={comment.comment_id}
-              currentUser={currentUser}
-              article_id={article_id}
-            />
-          );
-        })}
+        <ul>
+          <NewComment currentUser={currentUser} article_id={article_id} />
+          {comments.map(comment => {
+            return (
+              <CommentItem
+                comment={comment}
+                key={comment.comment_id}
+                currentUser={currentUser}
+                article_id={article_id}
+              />
+            );
+          })}
+        </ul>
         <Pages
           page={p}
           totalPages={totalPages}
@@ -47,7 +49,7 @@ class CommentList extends Component {
           limit={limit}
           changeLimit={this.changeLimit}
         />
-      </ul>
+      </>
     );
   }
   componentDidMount = () => {

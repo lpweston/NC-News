@@ -3,12 +3,12 @@ body {
 }
 
 b {
-  color: #ba1f31;
+  color: #ae1e2e;
   font-weight: bold;
 }
 
 a {
-  color: #ba1f31;
+  color: #ae1e2e;
 }
 
 section {
@@ -60,7 +60,7 @@ li {
 button {
   border: 0;
   background: transparent;
-  color: #ba1f31;
+  color: #cd2337;
   font-weight: bold;
 }
 

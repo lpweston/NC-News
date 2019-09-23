@@ -25,14 +25,16 @@ class NewComment extends Component {
       <div className="CommentItem">
         <New />
         <form onSubmit={this.sendComment}>
-          Post a comment: <br />
-          <br />
-          <textarea
-            placeholder="Post new comment"
-            value={this.state.body}
-            onChange={this.handleClick}
-            row="3"
-          />
+          <label>
+            Post a comment: <br />
+            <br />
+            <textarea
+              placeholder="Post new comment"
+              value={this.state.body}
+              onChange={this.handleClick}
+              row="3"
+            />
+          </label>
           <button>Submit</button>
           {err && <ErrorHandler {...err} />}
         </form>

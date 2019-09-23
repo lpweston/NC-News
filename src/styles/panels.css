@@ -2,7 +2,7 @@ header {
   text-align: center;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  background-color: #202829;
+  background-color: #1f1f1f;
   border-bottom: 4px solid grey;
   color: rgb(189, 189, 189);
   font-weight: bold;
@@ -10,7 +10,7 @@ header {
 
 nav {
   padding-top: 10px;
-  color: #ba1f31;
+  color: #cd2337;
   text-decoration: none;
   font-weight: bold;
 }
@@ -40,11 +40,16 @@ h3 {
 .sidebar {
   color: rgb(196, 196, 196);
   border-bottom: 4px solid grey;
-  background-color: #202829;
+  background-color: #1f1f1f;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
   font-weight: bold;
+}
+
+.sidebar b,
+header b {
+  color: #cd2337;
 }
 
 .seperator {
