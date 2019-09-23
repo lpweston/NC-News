@@ -32,7 +32,6 @@ class NewComment extends Component {
             value={this.state.body}
             onChange={this.handleClick}
             row="3"
-            cols="50"
           />
           <button>Submit</button>
           {err && <ErrorHandler {...err} />}

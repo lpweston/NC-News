@@ -67,3 +67,19 @@ h3 {
     height: 0px;
   }
 }
+
+@media (max-width: 759px) {
+  h1 {
+    padding-right: 15px;
+    font-size: 1.5em;
+  }
+  .UserSelect {
+    padding-bottom: 10px;
+    padding-top: 15px;
+  }
+  select {
+    width: 150px;
+    font-size: 1.1em;
+    margin-top: 3px;
+  }
+}

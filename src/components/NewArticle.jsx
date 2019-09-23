@@ -59,13 +59,7 @@ class NewArticle extends Component {
             <br />
             <label>
               Body:{" "}
-              <textarea
-                value={body}
-                name="body"
-                onChange={this.handleUpdate}
-                row="10"
-                cols="50"
-              />
+              <textarea value={body} name="body" onChange={this.handleUpdate} />
             </label>
             <br />
             <br />
