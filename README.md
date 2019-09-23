@@ -10,7 +10,11 @@ The front-end has been built with React and uses Axios to interact with the back
 
 ### Prerequistes
 
-Requires NodeJS, Node Package Manager (npm), Javascript code is written to ES6 standard.
+Requires
+
+- NodeJS (min 12.4.0),
+- Node Package Manager (npm) (min 6.11.3),
+- Javascript (written to ES6 standard).
 
 ### Installing
 
