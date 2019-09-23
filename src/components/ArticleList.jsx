@@ -46,8 +46,10 @@ class ArticleList extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { page, limit } = this.state;
-    const { sort_by, order } = this.props;
-    if (
+    const { sort_by, order, topic } = this.props;
+    if (prevProps.topic !== topic) {
+      this.setState({ page: 1, limit: 10 }, this.fetchArticles);
+    } else if (
       prevState.page !== page ||
       prevState.limit !== limit ||
       prevProps.sort_by !== sort_by ||

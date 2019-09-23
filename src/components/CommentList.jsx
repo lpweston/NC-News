@@ -55,10 +55,10 @@ class CommentList extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { page, limit } = this.state;
+    const { p, limit } = this.state;
     const { sort_by, order } = this.props;
     if (
-      prevState.page !== page ||
+      prevState.p !== p ||
       prevState.limit !== limit ||
       prevProps.sort_by !== sort_by ||
       prevProps.order !== order
